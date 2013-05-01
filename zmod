@@ -1,0 +1,10 @@
+#!/bin/bash
+
+mkdir zmodules_ready
+mkdir tempo
+cp -r /lib64/modules/3.4.10.NATALY/kernel tempo/
+rm -rf /lib64/modules/3.4.10.NATALY
+find tempo/kernel/ -name '*.ko' -exec cp --target-directory=zmodules_ready {} \;
+rm -rf tempo
+cd zmodules_ready
+arm-eabi-strip --strip-unneeded *.ko
