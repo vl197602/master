@@ -195,8 +195,7 @@ export KBUILD_BUILDHOST := $(SUBARCH)
 ARCH		?= $(SUBARCH)
 CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
 ARCH		:= arm
-CROSS_COMPILE	:= arm-eabi-
-
+CROSS_COMPILE	:= /home/qwe/arm-one-linux-gnueabi-4.6.4/bin/arm-eabi-
 # Architecture as present in compile.h
 UTS_MACHINE 	:= $(ARCH)
 SRCARCH 	:= $(ARCH)
