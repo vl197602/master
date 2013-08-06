@@ -129,6 +129,7 @@
 int set_two_phase_freq(int cpufreq);
 #endif
 
+
 static struct platform_device msm_fm_platform_init = {
 	.name = "iris_fm",
 	.id   = -1,
@@ -2780,11 +2781,28 @@ static struct platform_device msm_tsens_device = {
 
 static struct msm_thermal_data msm_thermal_pdata = {
 	.sensor_id = 9,
-	.poll_ms = 1000,
-	.limit_temp = 60,
-	.temp_hysteresis = 10,
-	.limit_freq = 918000,
-};
+#ifdef CONFIG_INTELLI_THERMAL
+        .poll_ms = 250,
+#ifdef CONFIG_CPU_OVERCLOCK
+        .limit_temp_degC = 72,
+#else
+        .limit_temp_degC = 65,
+#endif
+        .temp_hysteresis_degC = 10,
+        .freq_step = 2,
+        .freq_control_mask = 0xf,
+        .core_limit_temp_degC = 80,
+#else
+   .poll_ms = 1000,
+ #ifdef CONFIG_CPU_OVERCLOCK
+  .limit_temp = 72,
+ #else
+  .limit_temp = 65,
+ #endif
+   .temp_hysteresis = 10,
+   .limit_freq = 918000,
+#endif
+ };
 
 #ifdef CONFIG_MSM_FAKE_BATTERY
 static struct platform_device fish_battery_device = {
@@ -3111,7 +3129,7 @@ static struct msm_rpmrs_platform_data msm_rpmrs_data __initdata = {
 		[MSM_RPMRS_VDD_MEM_RET_LOW]	= 750000,
 		[MSM_RPMRS_VDD_MEM_RET_HIGH]	= 750000,
 		[MSM_RPMRS_VDD_MEM_ACTIVE]	= 1050000,
-		[MSM_RPMRS_VDD_MEM_MAX]		= 1150000,
+		[MSM_RPMRS_VDD_MEM_MAX]		= 1250000,
 	},
 	.vdd_dig_levels = {
 		[MSM_RPMRS_VDD_DIG_RET_LOW]	= 0,
@@ -3387,6 +3405,7 @@ static void __init register_i2c_devices(void)
 
 static void __init k2_ul_init(void)
 {
+
 	if (meminfo_init(SYS_MEMORY, SZ_256M) < 0)
 		pr_err("meminfo_init() failed!\n");
 

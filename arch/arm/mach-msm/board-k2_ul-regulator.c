@@ -440,10 +440,17 @@ msm8930_gpio_regulator_pdata[] __devinitdata = {
 };
 
 struct regulator_init_data msm8930_saw_regulator_core0_pdata =
-	
-	SAW_VREG_INIT(S5, "8038_s5",	       850000, 1300000);
+	#ifdef CONFIG_CPU_OVERCLOCK
+	SAW_VREG_INIT(S5, "8038_s5",	       850000, 1400000);
+#else
+       SAW_VREG_INIT(S5, "8038_s5",	       850000, 1300000);
+#endif
 struct regulator_init_data msm8930_saw_regulator_core1_pdata =
-	SAW_VREG_INIT(S6, "8038_s6",	       850000, 1300000);
+       #ifdef CONFIG_CPU_OVERCLOCK
+	SAW_VREG_INIT(S6, "8038_s6",	       850000, 1400000);
+#else
+       SAW_VREG_INIT(S6, "8038_s6",	       850000, 1300000);
+#endif
 
 struct pm8xxx_regulator_platform_data
 msm8930_pm8038_regulator_pdata[] __devinitdata = {
@@ -481,7 +488,7 @@ msm8930_rpm_regulator_init_data[] __devinitdata = {
 	RPM_LDO(L15,	 0, 1, 0, 1800000, 2950000, NULL,      0, 0),
 	RPM_LDO(L17,	 0, 1, 0, 1800000, 2950000, NULL,      0, 0),
 	RPM_LDO(L18,	 0, 1, 0, 1800000, 1800000, NULL,      0, 0),
-	RPM_LDO(L20,	 1, 1, 0, 1200000, 1200000, "8038_s2", 10000, 10000),
+	RPM_LDO(L20,	 1, 1, 0, 1250000, 1250000, "8038_s2", 10000, 10000),
 	RPM_LDO(L21,	 0, 1, 0, 1900000, 1900000, "8038_s4", 0, 0),
 	RPM_LDO(L22,	 1, 1, 0, 1850000, 2950000, NULL,      10000, 10000),
 	RPM_LDO(L23,	 1, 1, 1, 1800000, 1800000, "8038_s4", 0, 0),

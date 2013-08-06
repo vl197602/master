@@ -31,6 +31,9 @@
 #include <mach/cpufreq.h>
 #include <mach/board.h>
 
+
+
+
 #include "acpuclock.h"
 #ifdef CONFIG_PERFLOCK
 #include <mach/perflock.h>
@@ -170,7 +173,8 @@ static int __cpuinit msm_cpufreq_cpu_callback(struct notifier_block *nfb,
 static struct notifier_block __refdata msm_cpufreq_cpu_notifier = {
   .notifier_call = msm_cpufreq_cpu_callback,
 
-}; 
+};
+ 
 
 static void set_cpu_work(struct work_struct *work)
 {
@@ -179,6 +183,7 @@ static void set_cpu_work(struct work_struct *work)
 
 	cpu_work->status = set_cpu_freq(cpu_work->policy, cpu_work->frequency);
 	complete(&cpu_work->complete);
+
 }
 #endif
 
@@ -352,8 +357,8 @@ static int __cpuinit msm_cpufreq_init(struct cpufreq_policy *policy)
 #endif
 	}
 #ifdef CONFIG_MSM_CPU_FREQ_SET_MIN_MAX
-	policy->min = CONFIG_MSM_CPU_FREQ_MIN;
-	policy->max = CONFIG_MSM_CPU_FREQ_MAX;
+        policy->min = 384000;
+        policy->max = 1188000;
 #endif
 
 #ifdef CONFIG_ARCH_APQ8064
@@ -466,8 +471,9 @@ static int __init msm_cpufreq_register(void)
 	}
 
 #ifdef CONFIG_SMP
-	msm_cpufreq_wq = create_workqueue("msm-cpufreq");
-	register_hotcpu_notifier(&msm_cpufreq_cpu_notifier); 
+       msm_cpufreq_wq = alloc_workqueue("msm-cpufreq",
+       WQ_MEM_RECLAIM | WQ_HIGHPRI, 1);
+	register_hotcpu_notifier(&msm_cpufreq_cpu_notifier);
 #endif
 
 	register_pm_notifier(&msm_cpufreq_pm_notifier);

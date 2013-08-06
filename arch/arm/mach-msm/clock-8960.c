@@ -3405,8 +3405,8 @@ static struct clk_freq_tbl clk_tbl_gfx3d[] = {
 	F_GFX3D(228571000, pll2,  2,  7),
 	F_GFX3D(266667000, pll2,  1,  3),
 	F_GFX3D(320000000, pll2,  2,  5),
-	F_GFX3D(400000000, pll2,  1,  2),
-	F_GFX3D(450000000, pll15, 1,  2),
+	F_GFX3D(410000000, pll2,  1,  2),
+	F_GFX3D(430000000, pll15, 1,  2),
 	F_END
 };
 
@@ -3427,7 +3427,7 @@ static struct clk_freq_tbl clk_tbl_gfx3d_8960[] = {
 	F_GFX3D(266667000, pll2, 1,  3),
 	F_GFX3D(300000000, pll3, 1,  4),
 	F_GFX3D(320000000, pll2, 2,  5),
-	F_GFX3D(400000000, pll2, 1,  2),
+	F_GFX3D(410000000, pll2, 1,  2),
 	F_END
 };
 
@@ -3447,6 +3447,7 @@ static unsigned long fmax_gfx3d_8930[MAX_VDD_LEVELS] __initdata = {
 	[VDD_DIG_LOW]     = 192000000,
 	[VDD_DIG_NOMINAL] = 320000000,
 	[VDD_DIG_HIGH]    = 450000000
+
 };
 
 static struct bank_masks bmnd_info_gfx3d = {

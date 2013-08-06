@@ -1,7 +1,7 @@
 VERSION = 3
-PATCHLEVEL = 4
-SUBLEVEL = 10
-EXTRAVERSION = .NATALY
+PATCHLEVEL = 5
+SUBLEVEL = 25
+EXTRAVERSION = .FlashBeats
 NAME = Saber-toothed Squirrel
 
 # *DOCUMENTATION*
@@ -195,7 +195,7 @@ export KBUILD_BUILDHOST := $(SUBARCH)
 ARCH		?= $(SUBARCH)
 CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
 ARCH		:= arm
-CROSS_COMPILE	:= /home/qwe/arm-one-linux-gnueabi-4.6.4/bin/arm-eabi-
+CROSS_COMPILE	:= /root/kernel/arm-one-linux-gnueabi-4.7.3/bin/arm-eabi-
 # Architecture as present in compile.h
 UTS_MACHINE 	:= $(ARCH)
 SRCARCH 	:= $(ARCH)

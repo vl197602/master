@@ -253,3 +253,11 @@ config X86_SPEEDSTEP_RELAXED_CAP_CHECK
 	  option lets the probing code bypass some of those checks if the
 	  parameter "relaxed_check=1" is passed to the module.
 
+config CPU_FREQ_GOV_INTELLIDEMAND
+  tristate "'intellidemand' cpufreq governor"
+  depends on CPU_FREQ
+  help
+    'intellidemand' - A dynamic cpufreq governor for Low Latency Frequency 
+    Transition capable processors
+
+    If in doubt, say N.
