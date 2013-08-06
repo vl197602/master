@@ -1,6 +1,6 @@
 VERSION = 3
 PATCHLEVEL = 5
-SUBLEVEL = 25
+SUBLEVEL = 27
 EXTRAVERSION = .FlashBeats
 NAME = Saber-toothed Squirrel
 
